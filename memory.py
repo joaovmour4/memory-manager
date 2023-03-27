@@ -18,6 +18,7 @@ class Memory:
             self.memory.append([process.id for i in range(process.size)])
             self.processes.append(process)
             process.addProcess()
+            return 1
         else:
             for i in range(len(self.memory)):
                 if len(self.memory[i]) >= process.size and self.memory[i][0] == ' ':    
@@ -33,6 +34,8 @@ class Memory:
                     self.processes.append(process)
                     process.addProcess()
                     break
+            return 1
+        process.removeProcess()
         
         
     
