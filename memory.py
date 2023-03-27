@@ -3,7 +3,7 @@ import random
 
 class Memory:
     max = 20
-    def __init__(self) -> None:
+    def __init__(self):
         self.memory = []
         self.processes = []
     
@@ -18,13 +18,11 @@ class Memory:
             self.memory.append([process.id for i in range(process.size)])
             self.processes.append(process)
             process.addProcess()
-            return 1
         else:
             for i in range(len(self.memory)):
-                if len(self.memory[i]) >= process.size and self.memory[i][0] == ' ':    
+                if len(self.memory[i]) >= process.size and ' ' in self.memory[i]:
                     if len(self.memory[i]) == process.size:
-                        for elemento in self.memory[i]:
-                            elemento = process.id
+                        self.memory[i] = [process.id for i in range(len(self.memory[i]))]
                     else:
                         aux = len(self.memory[i]) - process.size
                         for j in range(aux):
@@ -34,11 +32,8 @@ class Memory:
                     self.processes.append(process)
                     process.addProcess()
                     break
-            return 1
-        process.removeProcess()
         
-        
-    
+
     def removeList(self, process):
         for i in range(len(self.memory)):
             if self.memory[i][0] == process.id:
@@ -53,6 +48,6 @@ class Memory:
             self.removeList(self.processes[aux])
     
     def printMemory(self):
-        print(self.memory)
-        print(Process.processes)
+        print(f'Memória: {self.memory}')
+        print(f'Processos alocados: {Process.processes}')
             

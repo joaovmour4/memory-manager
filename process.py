@@ -9,7 +9,7 @@ class Process:
             if tempID not in Process.processes:
                 self.id = tempID
                 break
-        self.size = random.randint(1, 5)
+        self.size = random.randint(1, 3)
         self.time = random.randint(1, 3)
         # if self.posInit is not None:    
         #     self.insertDict(memory)
