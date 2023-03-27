@@ -50,4 +50,10 @@ class Memory:
     def printMemory(self):
         print(f'Memória: {self.memory}')
         print(f'Processos alocados: {Process.processes}')
+
+    def compact(self):
+        if len(self.memory) >= 10:
+            for segment in self.memory:
+                if ' ' in segment:
+                    self.memory.remove(segment)
             

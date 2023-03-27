@@ -10,6 +10,7 @@ while True:
     memory.insertMemory(Process())
     memory.printMemory()
     memory.refresh()
+    memory.compact()
     time.sleep(0.5)
     os.system('cls')
 
