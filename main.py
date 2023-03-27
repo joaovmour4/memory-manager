@@ -11,6 +11,6 @@ while True:
     memory.printMemory()
     memory.refresh()
     memory.compact()
-    time.sleep(0.5)
+    time.sleep(1)
     os.system('cls')
 
