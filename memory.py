@@ -51,8 +51,8 @@ class Memory:
     def printMemory(self):
         print(f'Memória: {self.memory}')
         print('Memória principal: ')
-        for i in range(len(self.processes)):
-            print(f'{i} a {i+self.processes[i].size-1} : {self.processes[i].id}')
+        for i in self.processes:
+            print(f'{i.memoryP} a {i.memoryP+i.size} : {i.id}')
 
     def compact(self):
         if len(self.memory) >= Memory.max/2:
