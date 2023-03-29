@@ -1,8 +1,10 @@
 from process import Process
 import random
 
+
 class Memory:
     max = 20
+
     def __init__(self):
         self.memory = []
         self.processes = []
@@ -32,7 +34,6 @@ class Memory:
                     self.processes.append(process)
                     process.addProcess()
                     break
-        
 
     def removeList(self, process):
         for i in range(len(self.memory)):
@@ -49,10 +50,12 @@ class Memory:
     
     def printMemory(self):
         print(f'Memória: {self.memory}')
-        print(f'Processos alocados: {Process.processes}')
+        print('Memória principal: ')
+        for i in range(len(self.processes)):
+            print(f'{i} a {i+self.processes[i].size-1} : {self.processes[i].id}')
 
     def compact(self):
-        if len(self.memory) >= 10:
+        if len(self.memory) >= Memory.max/2:
             for segment in self.memory:
                 if ' ' in segment:
                     self.memory.remove(segment)

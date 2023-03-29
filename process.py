@@ -3,6 +3,7 @@ import string
 
 class Process:
     processes = []
+    memoryP = 0
     def __init__(self):
         while True:    
             tempID = random.choice(string.ascii_uppercase)
@@ -11,9 +12,8 @@ class Process:
                 break
         self.size = random.randint(1, 3)
         self.time = random.randint(1, 2)
-        # if self.posInit is not None:    
-        #     self.insertDict(memory)
-        # Process.processes.append(self.id)
+        self.memoryP = Process.memoryP
+        Process.memoryP += self.size+1
 
     
     def removeProcess(self):
