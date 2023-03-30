@@ -10,7 +10,7 @@ class Process:
             if tempID not in Process.processes:
                 self.id = tempID
                 break
-        self.size = random.randint(1, 3)
+        self.size = random.randint(1, 7)
         self.time = random.randint(1, 2)
         self.memoryP = Process.memoryP
         Process.memoryP += self.size+1
