@@ -39,8 +39,8 @@ class Memory:
     def removeList(self, process):
         for i in range(len(self.memory)):
             if self.memory[i][0] == process.id:
-                self.memory[i] = [' ' for i in range(len(self.memory[i]))]
                 self.processes.remove(process)
+                self.memory[i] = [' ' for i in range(len(self.memory[i]))]
                 process.removeProcess()
     
     def refresh(self):
@@ -48,38 +48,24 @@ class Memory:
         self.processes[aux].time -= 1
         if self.processes[aux].time <= 0:
             self.removeList(self.processes[aux])
-    
-    # def printMemory(self):
-    #     print(f'Memória virtual: {self.memory}')
-    #     print('Memória principal: ')
-    #     for i in self.processes:
-    #         print(f'Endereços {i.memoryP} a {i.memoryP+i.size} : {i.id}')
 
-    def printMemory(self, root):
-        lbls = []
-        row = 1
-        col = 0
-        if len(lbls) == 0:
-            for elemento in self.processes:
-                lbl = Label(root, text=f'{elemento.id}',
-                            width=5, height=1, borderwidth=1, relief='solid')
-                lbls.append(lbl)
-                lbl.grid(row=row, column=col, columnspan=elemento.size, pady=2, padx=10)
-                col += 1
-                if col >= 5:
-                    col = 0
-                    row += 1
-        else:
-            for elemento in lbls:
-                elemento.grid_remove()
+    def printMemory(self, root, lbls):
+        for i in range(len(self.memory)):
+            lbl = Label(root, text=self.memory[i][0], width=len(self.memory[i]), borderwidth=1, relief='solid')
+            lbls.append(lbl)
+            lbl.grid(row=1, column=i, sticky=EW)
+        for i in range(len(self.processes)):    
+            lbl = Label(root, text=f'Processo: {self.processes[i].id}, Posições MP: {self.processes[i].mpPos}\
+                        \nEspaço virtual alocado: {self.processes[i].size}', 
+                        width=40, borderwidth=1, relief='solid', anchor='w')
+            lbls.append(lbl)
+            lbl.grid(row=i+1, column=15, padx=10, sticky=EW)
+            
 
-            for i in range(len(self.processes)):
-                    lbls[i]['text'] = f'{self.processes[i].id}'
-                    lbl.grid(row=row, column=col, columnspan=self.processes[i].size, pady=2, padx=1)
-                    col += 1
-                    if col >= 5:
-                        col = 0
-                        row += 1
+    def gridRemove(self, lbls):
+        if len(lbls) != 0:
+            for lbl in lbls:
+                lbl.grid_remove()
 
     def compact(self):
         if len(self.memory) >= Memory.max/2:
